@@ -1,0 +1,17 @@
+---
+interface Project { id: string; name: string; href?: string }
+const { projects } = Astro.props as { projects: Project[] };
+---
+<div>
+  <div class="flex items-center gap-2 text-xs tracking-widest uppercase">
+    <span>Projects</span><span>↘</span>
+  </div>
+  <ul class="mt-4 space-y-2 text-sm">
+    {projects.map((p) => (
+      <li class="flex gap-4">
+        <span class="w-8 tabular-nums">{p.id}</span>
+        <a href={p.href ?? "#"} class="hover:underline">{p.name}</a>
+      </li>
+    ))}
+  </ul>
+</div>

@@ -1,0 +1,13 @@
+---
+import Layout from "./Layout.astro";
+
+---
+<Layout title="Claud — Portfolio">
+  <div class="mx-auto max-w-[1400px] px-6 lg:px-10">
+    <div class="grid grid-cols-1 lg:grid-cols-12 gap-8 min-h-screen">
+      <slot name="left" />
+      <slot name="center" />
+      <slot name="right" />
+    </div>
+  </div>
+</Layout>

@@ -1,11 +1,36 @@
 ---
-import Welcome from '../components/Welcome.astro';
-import Layout from '../layouts/Layout.astro';
-
-// Welcome to Astro! Wondering what to do next? Check out the Astro documentation at https://docs.astro.build
-// Don't want to use any of this? Delete everything in this file, the `assets`, `components`, and `layouts` directories, and start fresh.
+import PortfolioLayout from "../layouts/PortfolioLayout.astro";
+import ProjectList from "../components/ProjectList.astro";
+import ImageStripe from "../components/ImageStripe.astro";
+import RightNav from "../components/RightNav.astro";
+import { projects } from "../data/projects";
+import { images } from "../data/images";
+import ClockIsland from "../components/clockIsland";
 ---
+<PortfolioLayout>
+  <section slot="left" class="lg:col-span-4 flex flex-col justify-between py-10">
+    <div>
+      <h1 class="leading-none tracking-tight font-extrabold text-[14vw] lg:text-[88px]">
+        <span class="block">CLAUDIO</span><span class="block">VS</span>
+      </h1>
+      <div class="mt-10">
+        <ProjectList {projects} />
+      </div>
+       <div class="mt-10">
+        <ProjectList {projects} />
+      </div>
+    </div>
+    <ClockIsland client:idle />
+  </section>
 
-<Layout>
-	<Welcome />
-</Layout>
+  <main slot="center" class="lg:col-span-5 py-10">
+    <div class="flex flex-col gap-6">
+      {images.map((src) => <ImageStripe src={src} />)}
+    </div>
+  </main>
+
+  <aside slot="right" class="lg:col-span-3 py-10 flex flex-col justify-between">
+    <div class="flex justify-end"><RightNav /></div>
+    <div class="text-right text-[10px] text-neutral-600">FRONTEND DEV</div>
+  </aside>
+</PortfolioLayout>

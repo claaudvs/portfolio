@@ -1,0 +1,7 @@
+---
+const { src, alt = "project" } = Astro.props as { src: string; alt?: string };
+---
+<a href="#" class="group block overflow-hidden">
+  <img src={src} alt={alt}
+    class="h-28 lg:h-32 w-full object-cover grayscale group-hover:grayscale-0 transition" loading="lazy" />
+</a>
