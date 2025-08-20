@@ -1,31 +1,28 @@
 ---
 import PortfolioLayout from "../layouts/PortfolioLayout.astro";
-import ProjectList from "../components/ProjectList.astro";
 import ImageStripe from "../components/ImageStripe.astro";
-import RightNav from "../components/RightNav.astro";
+import RightNav from "../components/shared/RightNav.astro";
 import { projects } from "../data/projects";
-import { images } from "../data/images";
 import ClockIsland from "../components/clockIsland";
+import SkillList from "../components/skills/SkillList.astro";
 ---
 <PortfolioLayout>
   <section slot="left" class="lg:col-span-4 flex flex-col justify-between py-10">
     <div>
       <h1 class="leading-none tracking-tight font-extrabold text-[14vw] lg:text-[88px]">
-        <span class="block">CLAUDIO</span><span class="block">VS</span>
+        <span class="block">CLAUDIO</span><span class="block">v.s.</span>
       </h1>
       <div class="mt-10">
-        <ProjectList {projects} />
+        <SkillList/>
       </div>
-       <div class="mt-10">
-        <ProjectList {projects} />
-      </div>
+    
     </div>
     <ClockIsland client:idle />
   </section>
 
   <main slot="center" class="lg:col-span-5 py-10">
     <div class="flex flex-col gap-6">
-      {images.map((src) => <ImageStripe src={src} />)}
+      {projects.map((project) => <ImageStripe id={project.id} src={`${project.image}`} />)}
     </div>
   </main>
 

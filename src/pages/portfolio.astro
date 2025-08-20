@@ -1,0 +1,24 @@
+---
+import Layout from "../layouts/Layout.astro";
+interface Props {
+    title: string;
+    comments: string;
+    image: string;
+    tools: string[];
+}
+const {title, comments, image, tools } = Astro.props;
+
+---
+<Layout title="Projects" description="My projects portfolio">
+    <div>
+        <h1>{title}</h1>
+         <p>{comments}</p>
+         <img src={image} alt={title} />
+         <ul>
+             {tools.map((tool) => (
+                 <li>{tool}</li>
+             ))}
+         </ul>
+    </div>
+
+</Layout>

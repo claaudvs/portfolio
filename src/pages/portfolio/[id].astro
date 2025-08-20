@@ -1,0 +1,54 @@
+---
+import type { GetStaticPaths } from "astro";
+import { projects } from "../../data/projects";
+import type { Project } from "../../interfaces/project.model";
+import Layout from "../../layouts/Layout.astro";
+import ButtonBack from "../../components/ButtonBack.astro"
+
+export const getStaticPaths = (() => {
+    return projects.map((project: Project) => {
+        return {
+            params: { id: project.id },
+            props: {
+                title: project.title,
+                description: project.description,
+                image: project.image,
+                tools: project.tools,
+            },
+        };
+    });
+}) satisfies GetStaticPaths;
+
+const { id } = Astro.params;
+const { title, description, image, tools } = Astro.props;
+---
+
+<Layout title={title} description={description}>
+    <ButtonBack />
+    <section
+        class="flex flex-col md:flex-row items-start gap-10 px-8 py-16 max-w-screen-xl mx-auto"
+    >
+        <div class="md:w-1/2 space-y-4">
+            <h1 class="text-5xl font-bold text-neutral-800">{title}</h1>
+            <p class="text-neutral-600">{description}</p>
+            <ul class="mt-6 space-y-1">
+                {
+                    tools.map((tool) => (
+                        <li class="text-sm text-neutral-700 border-l-4 border-neutral-300 pl-2">
+                            {tool}
+                        </li>
+                    ))
+                }
+            </ul>
+        </div>
+
+        <div class="md:w-1/2">
+            <img
+                transition:name={`${id}-image`}
+                src={`../${image}`}
+                alt={title}
+                class="w-full h-auto object-cover grayscale contrast-125 brightness-90 rounded-lg shadow-lg"
+            />
+        </div>
+    </section>
+</Layout>
